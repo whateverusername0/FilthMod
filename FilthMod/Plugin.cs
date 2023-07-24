@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using HarmonyLib;
 
 namespace FilthMod
 {
@@ -12,7 +13,7 @@ namespace FilthMod
 
         public void Awake()
         {
-
+            Harmony.CreateAndPatchAll(System.Reflection.Assembly.GetExecutingAssembly(), $"{PLUGIN_GUID}.Patcher");
         }
     }
 }
