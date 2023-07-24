@@ -20,7 +20,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(V2))] internal class VTwo
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(V2.Start))] static void RemoveArms(V2 __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(V2.Start))] static void RemoveArms(V2 __instance)
             {
                 Transform[] T;
                 if (__instance.secondEncounter)
@@ -44,7 +44,7 @@ namespace FilthMod
         // stray, schism, soldier
         [HarmonyPatch(typeof(ZombieProjectiles))] internal class SSS
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(ZombieProjectiles.Start))] static void RemoveArms(ZombieProjectiles __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(ZombieProjectiles.Start))] static void RemoveArms(ZombieProjectiles __instance)
             {
                 Transform[] T;
                 switch (__instance.GetComponent<EnemyIdentifier>().fullName)
@@ -84,9 +84,22 @@ namespace FilthMod
                 try { Patches.RemoveArms(T); } catch {}
             }
         }
+        [HarmonyPatch(typeof(StatueBoss))] internal class Cerberus
+        {
+            [HarmonyPostfix] [HarmonyPatch(nameof(StatueBoss.Start))] static void RemoveArms(StatueBoss __instance)
+            {
+                Transform[] T =
+                {
+                    __instance.transform.GetChild(2).GetChild(0).GetChild(2).GetChild(0).GetChild(1),
+                    __instance.transform.GetChild(2).GetChild(0).GetChild(2).GetChild(0).GetChild(2)
+                };
+                __instance.GetComponent<EnemyIdentifier>().overrideFullName = "Filthberus";
+                Patches.RemoveArms(T);
+            }
+        }
         [HarmonyPatch(typeof(Stalker))] internal class Stakler
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Stalker.Start))] static void RemoveArms(Stalker __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Stalker.Start))] static void RemoveArms(Stalker __instance)
             {
                 Transform[] T =
                 {
@@ -99,7 +112,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(Sisyphus))] internal class Insurrectionist
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Sisyphus.Start))] static void RemoveArms(Sisyphus __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Sisyphus.Start))] static void RemoveArms(Sisyphus __instance)
             {
                 Transform[] T =
                 {
@@ -113,7 +126,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(Ferryman))] internal class Furryman
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Ferryman.Start))] static void RemoveArms(Ferryman __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Ferryman.Start))] static void RemoveArms(Ferryman __instance)
             {
                 Transform[] T =
                 {
@@ -127,7 +140,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(SwordsMachine))] internal class SM
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(SwordsMachine.Start))] static void RemoveArms(SwordsMachine __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(SwordsMachine.Start))] static void RemoveArms(SwordsMachine __instance)
             {
                 Transform[] T =
                 {
@@ -142,7 +155,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(Streetcleaner))] internal class Streetwiper
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Streetcleaner.Start))] static void RemoveArms(Streetcleaner __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Streetcleaner.Start))] static void RemoveArms(Streetcleaner __instance)
             {
                 Transform[] T =
                 {
@@ -155,7 +168,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(Mindflayer))] internal class Motherfucker
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Mindflayer.Start))] static void RemoveArms(Mindflayer __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Mindflayer.Start))] static void RemoveArms(Mindflayer __instance)
             {
                 Transform[] T =
                 {
@@ -169,7 +182,7 @@ namespace FilthMod
 
         [HarmonyPatch(typeof(Mass))] internal class HideousMass
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Mass.Start))] static void RemoveArms(Mass __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Mass.Start))] static void RemoveArms(Mass __instance)
             {
                 Transform[] T =
                 {
@@ -183,7 +196,7 @@ namespace FilthMod
         [HarmonyPatch(typeof(Gabriel))] internal class Gabe
         {
 
-            [HarmonyPrefix] [HarmonyPatch(nameof(Gabriel.Start))] static void RemoveArms(Gabriel __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Gabriel.Start))] static void RemoveArms(Gabriel __instance)
             {
                 Transform[] T =
                 {
@@ -198,7 +211,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(GabrielSecond))] internal class Gabe2
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(GabrielSecond.Start))] static void RemoveArms(GabrielSecond __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(GabrielSecond.Start))] static void RemoveArms(GabrielSecond __instance)
             {
                 Transform[] T =
                 {
@@ -213,7 +226,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(Mandalore))] internal class DruidKnight
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(Mandalore.Start))] static void RemoveArms(Mandalore __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(Mandalore.Start))] static void RemoveArms(Mandalore __instance)
             {
                 Transform[] T =
                 {
@@ -226,7 +239,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(MinosPrime))] internal class MeenosPrime
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(MinosPrime.Start))] static void RemoveArms(MinosPrime __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(MinosPrime.Start))] static void RemoveArms(MinosPrime __instance)
             {
                 Transform[] T =
                 {
@@ -239,7 +252,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(SisyphusPrime))] internal class SissyphusPrime
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(SisyphusPrime.Start))] static void RemoveArms(SisyphusPrime __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(SisyphusPrime.Start))] static void RemoveArms(SisyphusPrime __instance)
             {
                 Transform[] T =
                 {
@@ -257,7 +270,7 @@ namespace FilthMod
         }
         [HarmonyPatch(typeof(MinosBoss))] internal class Corpse
         {
-            [HarmonyPrefix] [HarmonyPatch(nameof(MinosBoss.Start))] static void RemoveArms(MinosBoss __instance)
+            [HarmonyPostfix] [HarmonyPatch(nameof(MinosBoss.Start))] static void RemoveArms(MinosBoss __instance)
             {
                 Transform[] T =
                 {
